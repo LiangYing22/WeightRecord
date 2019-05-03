@@ -1,7 +1,10 @@
 package com.example.lying.weightrecord;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,7 +12,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.lying.weightrecord.util.Util;
 
@@ -35,6 +40,7 @@ public class WeightReclerViewAdapt extends RecyclerView.Adapter<WeightReclerView
     private MyDBHelper myDBHelper;
     private SQLiteDatabase mydatabase;
     private Context context;
+    private String TableName = MyDBHelper.Table_Weight_NANE;
     //数据源(从数据库中获取)
     private List<Weight> Data = new ArrayList<>();
 
@@ -48,7 +54,6 @@ public class WeightReclerViewAdapt extends RecyclerView.Adapter<WeightReclerView
     private void initData(){
         Data.clear();
         //获取表名
-        String TableName = MyDBHelper.Table_Weight_NANE;
         SharedPreferences sharedPreferences= context.getSharedPreferences("User", Context .MODE_PRIVATE);
         String userId=sharedPreferences.getString("UserID","游客");
         if(userId.equals("游客")){
@@ -95,17 +100,39 @@ public class WeightReclerViewAdapt extends RecyclerView.Adapter<WeightReclerView
     }
 
     @Override
-    public void onBindViewHolder(WeightReclerViewAdapt.ViewHolder holder, int position) {
+    public void onBindViewHolder(final WeightReclerViewAdapt.ViewHolder holder, final int position) {
         Weight weight = Data.get(position);
         holder.itemDate.setText(Util.getDate(weight.getDate()));
         holder.itemSpecificDate.setText(weight.getSpecificDate());
         holder.itemSpecificTime.setText(weight.getSpecificTime());
         holder.itemName.setText(weight.getName());
         holder.itemWeight.setText(weight.getWeight());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View v) {
-                // TODO
+            public boolean onLongClick(View v) {
+                final EditText et = new EditText(context);
+                new AlertDialog.Builder(context).setTitle("请输入新的体重")
+                        .setIcon(R.drawable.irm)
+                        .setView(et)
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //按下确定键后的事件
+                                String input = et.getText().toString().trim();
+                                try{
+                                    double inputDouble = Double.parseDouble(input);
+                                    Data.get(position).setWeight(inputDouble+" kg("+inputDouble*2+" 斤)");
+                                    holder.itemWeight.setText(inputDouble+" kg("+inputDouble*2+" 斤)");
+                                    //更改数据库
+                                    ContentValues contentValues = new ContentValues();
+                                    contentValues.put("WeightText",inputDouble+" kg("+inputDouble*2+" 斤)");
+                                    mydatabase.update(TableName,contentValues,"WeightSpecificDate=?",new String[]{Data.get(position).getSpecificDate()});
+                                }catch (Exception e){
+                                    Toast.makeText(context,"请输入正确的体重数字!",Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }).setNegativeButton("取消",null).show();
+                return false;
             }
         });
     }
