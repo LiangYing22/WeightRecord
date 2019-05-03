@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="25dp">
+
+    <RelativeLayout
+        android:id="@+id/loginUserIdRL"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="30dp">
+
+        <TextView
+            android:id="@+id/loginUserIdTip"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="账号:"
+            android:padding="10dp"
+            android:gravity="center"/>
+        <EditText
+            android:id="@+id/loginUserId"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/loginUserIdTip"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/loginUserPWRL"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="30dp"
+        android:layout_below="@id/loginUserIdRL">
+
+        <TextView
+            android:id="@+id/loginUserPWTip"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="密码:"
+            android:padding="10dp"
+            android:gravity="center"/>
+        <EditText
+            android:id="@+id/loginUserPW"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"
+            android:layout_toRightOf="@id/loginUserPWTip"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/loginLoginButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/loginUserPWRL"
+        android:text="登陆"
+        android:background="#b1e7dc"/>
+
+    <TextView
+        android:id="@+id/loginError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:padding="10dp"
+        android:layout_below="@id/loginLoginButton"
+        android:text="账号或密码错误！"
+        android:gravity="center"
+        android:textColor="#f60559"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/loginToRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="没有账号？去注册"
+        android:layout_below="@id/loginError"
+        android:textColor="#259885"
+        android:gravity="center"
+        android:textSize="20sp"/>
+
+</RelativeLayout>

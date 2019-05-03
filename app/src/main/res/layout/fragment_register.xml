@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="25dp">
+
+    <RelativeLayout
+        android:id="@+id/registerUserIdRL"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="30dp">
+
+        <TextView
+            android:id="@+id/registerUserIdTip"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="账号:"
+            android:padding="10dp"
+            android:gravity="center"/>
+        <EditText
+            android:id="@+id/registerUserId"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/registerUserIdTip"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/registerUserNameRL"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="30dp"
+        android:layout_below="@id/registerUserIdRL">
+
+        <TextView
+            android:id="@+id/registerUserNameTip"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="姓名:"
+            android:padding="10dp"
+            android:gravity="center"/>
+        <EditText
+            android:id="@+id/registerUserName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/registerUserNameTip"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/registerUserPWRL"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="30dp"
+        android:layout_below="@id/registerUserNameRL">
+
+        <TextView
+            android:id="@+id/registerUserPWTip"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="密码:"
+            android:padding="10dp"
+            android:gravity="center"/>
+        <EditText
+            android:id="@+id/registerUserPW"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"
+            android:layout_toRightOf="@id/registerUserPWTip"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/registerRegisterButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/registerUserPWRL"
+        android:background="#b1e7dc"
+        android:text="注册"/>
+
+    <TextView
+        android:id="@+id/registerErrorTip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/registerRegisterButton"
+        android:textColor="#e64475"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="该账号已存在！或输入为空！"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/registerToLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/registerErrorTip"
+        android:textColor="#259885"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:text="点我去登陆！"
+        android:layout_marginTop="20dp"/>
+
+</RelativeLayout>
