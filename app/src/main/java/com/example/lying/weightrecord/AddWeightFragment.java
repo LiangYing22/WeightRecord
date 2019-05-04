@@ -72,7 +72,7 @@ public class AddWeightFragment extends Fragment {
                 SharedPreferences sharedPreferences= context.getSharedPreferences("User", Context .MODE_PRIVATE);
                 String userId=sharedPreferences.getString("UserID","游客");
                 String Name = Util.getName(userId,mydatabase);
-                Cursor cursor_for_weight = mydatabase.rawQuery("select * from " + MyDBHelper.Table_Weight_NANE, null);
+                Cursor cursor_for_weight = mydatabase.rawQuery("select * from " + TableName, null);
                 int count = cursor_for_weight.getCount();
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("WeightID",count+1);
